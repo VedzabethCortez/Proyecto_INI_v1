@@ -1,5 +1,5 @@
 /*     REGLAS PARA EL PROYECTO: Ecos de Traición y Horror en C
-IDEA: Juego con 12 personajes y 4 grupos (3 por equipo)  6 VS6.
+IDEA: Juego con 12 personajes y 4 grupos (3 por grupo)  6 VS6.
                    REGLAS A SEGUIR:
 1. Comentarios: Usar para aclarar el propósito de variables y funciones.
 2. Nomenclatura: Usar PascalCase para variables ( NombreDeVariable). 
@@ -14,23 +14,67 @@ IDEA: Juego con 12 personajes y 4 grupos (3 por equipo)  6 VS6.
 #include <time.h>    /* necesaria para que la funcion srand tome el reloj interno del computador como "semilla"*/
 /* INDICE DE PROTOTIPOS(FUNCIONES) se iran mencionando aca para que el programa sepa que en 
 algun momento conseguira una funcion con ese nombre*/
-int MostarMenuPrincipal();
-//añadir 2 funciones int para FormaDeSeleccionDePersonajes y ResumenDeSeleccion, para realizar el otro menu//
-//recordar hacer una funcion aleatrorio entera que sera llamada en FormaDeSeleccionDePersonajes//
+int ShowPrincipalMenu();
+/*añadir 2 funciones int para FormaDeSeleccionDePersonajes y ResumenDeSeleccion, para realizar el otro menu//
+recordar hacer una funcion aleatrorio entera que sera llamada en FormaDeSeleccionDePersonajes*/
+void SelectLenguaje();// ingles opcion 1, español opcion 2//
+void Pricipalloop();
 void ConfigurarPartida();
 void IniciarCuentaRegresiva();
+
 /* VARIABLES GLOBALES*/
-//por ahora solo la que conrtola el apagado del juego/
-	bool JuegoEncendido =true;
-/*CORAZON DEL PROYECTO creo*/
+int Lenguaje=0; /* 0 es español y 1 ingles*/
+bool JuegoEncendido =true;//por ahora solo la que conrtola el apagado del juego//
+/*INT MAIN EN DONDE LLAMO SOLO A UNA FUNCION */
 int main()
+{   SelectLenguaje();
+	Pricipalloop();
+return 0;
+}
+/*===================================================================================
+=====================================================================================
+======================FUNCIONES====================================================*/
+/* aca se elije el idioma del juego*/
+void SelectLenguaje()
+ {
+	int Option;
+	printf("=========================================\n");
+	printf("select a lenguaje // Selecciona un Idioma\n");
+	printf("=========================================\n");	
+	printf("1- ENGLISH       //    1-  INGLES\n");
+	printf("2- SPANISH       //   2- ESPANIOL\n");
+	printf("Your selection   //  Su Seleccion: -> ");
+	scanf("%d", &Option);
+		if(Option==1)
+		{
+			Lenguaje=1;
+			printf("=========================================\n");
+			printf("inicializando el juego en ingles(TRADUCIR)\n");
+			printf("=========================================\n");
+			printf("||\n");
+			printf("||\n");
+		}
+		else
+		{
+			Lenguaje=0;
+			printf("=========================================\n");
+			printf("inicializando el juego en **ESPANIOL**\n");
+			printf("=========================================\n");
+			printf("||\n");
+			printf("||\n");
+		}
+}
+/* es el bucle principal donde se inicia el juego*/
+void Pricipalloop()
 {
-	/*variables locales*/
+	const char* Opcion1[2]={"\n1---Jugar\n","\n1---Play\n"};	
+/*variables locales*/
 	int OpcionDeInicio;
+
 /*inicio del bucle principal del juego.la condicion de "JuegoEncendido= false"es la condicion de salida del juego"*/
 	while (JuegoEncendido == true)
 	{
-		OpcionDeInicio= MostarMenuPrincipal();
+		OpcionDeInicio= ShowPrincipalMenu();
 		//Aca llamamos a la funcion para mostrar menu principal//
 		if (OpcionDeInicio==1)
 		{
@@ -81,10 +125,12 @@ int main()
 			printf ("\n=================================================<<<<<<<<<<<<<<<<<<<\n");
 		}
 	}
-return 0;
+
+
+	
 }
 //funcion encargada del menu principal//
-int MostarMenuPrincipal()
+int ShowPrincipalMenu()
 {
 	int SeleccionUsuario;
 	printf ("\n ======================================\n");
