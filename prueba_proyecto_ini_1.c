@@ -12,6 +12,7 @@ IDEA: Juego con 12 personajes y 4 grupos (3 por grupo)  6 VS6.
 #include <stdbool.h> /* para poder usar valores verdaderos o falsos*/
 #include <stdlib.h>  /* funciones como rand y srand para numeros "aleatorios"*/
 #include <time.h>    /* necesaria para que la funcion srand tome el reloj interno del computador como "semilla"*/
+#include <math.h> /* Necesaria para operaciones matematicas un poco mas avanzadas */
 /* INDICE DE PROTOTIPOS(FUNCIONES) se iran mencionando aca para que el programa sepa que en
 algun momento conseguira una funcion con ese nombre*/
 int ShowPrincipalMenu();
@@ -101,7 +102,7 @@ void Principaloop()
                 JuegoEncendido = false;
                 break;
 
-            default: // El 'default' reemplaza a tu último 'else' (si pone un número que no existe)
+            default:
                 printf("\n==Opcion no valida! Intente de nuevo Por favor===\n");
                 break;
         }
