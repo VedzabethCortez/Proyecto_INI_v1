@@ -18,7 +18,7 @@ algun momento conseguira una funcion con ese nombre*/
 int ShowPrincipalMenu();
 /*añadir 2 funciones int para FormaDeSeleccionDePersonajes y ResumenDeSeleccion, para realizar el otro menu//
 recordar hacer una funcion aleatrorio entera que sera llamada en FormaDeSeleccionDePersonajes*/
-void SelectLanguage();// ingles opcion 1, español opcion 2//
+void SelectLanguage();// español opcion 1, ingles opcion 2//
 void Principaloop();
 void MenuJump();
 void ConfigurarPartida();
@@ -32,7 +32,7 @@ bool JuegoEncendido =true;//por ahora solo la que conrtola el apagado del juego/
 //<<<<<grupos de cartas >>//
 
 
-/*INT MAIN EN DONDE LLAMO SOLO A UNA FUNCION */
+/*INT MAIN EN DONDE LLAMO SOLO A DOS FUNCIONES */
 int main()
 {	SelectLanguage();
 	Principaloop();
@@ -86,22 +86,17 @@ void Principaloop()
         {
             case 1:
                 ConfigurarPartida();
-                break; // El break es obligatorio para que no se ejecuten las demás opciones
-
+                break;
             case 2:
                 printf("\n ***==informacion y reglas== del juego***\n");
                 break;
-
             case 3:
                 printf("\n**** Ver lista de personajes****\n");
-                // Aquí irá la llamada a tu catálogo después
                 break;
-
             case 4:
                 printf("\n*** =SALIENDO DEL JUEGO GRACIAS POR JUGAR! ***\n");
                 JuegoEncendido = false;
                 break;
-
             default:
                 printf("\n==Opcion no valida! Intente de nuevo Por favor===\n");
                 break;
