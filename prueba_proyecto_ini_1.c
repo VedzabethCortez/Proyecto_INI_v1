@@ -1,5 +1,5 @@
 /*     REGLAS PARA EL PROYECTO: Ecos de Traición y Horror en C
-IDEA: Juego con 12 personajes y 4 grupos (3 por grupo)  6 VS6.
+IDEA: Juego con 12 personajes y 4 grupos (3 por grupo)  5 VS5 .
                    REGLAS A SEGUIR:
 1. Comentarios: Usar para aclarar el propósito de variables y funciones.
 2. Nomenclatura: Usar PascalCase para variables ( NombreDeVariable).
