@@ -15,38 +15,49 @@ IDEA: Juego con 12 personajes y 4 grupos (3 por grupo)  5 VS5 .
 #include <math.h> /* Necesaria para operaciones matematicas un poco mas avanzadas */
 /* INDICE DE PROTOTIPOS(FUNCIONES) se iran mencionando aca para que el programa sepa que en
 algun momento conseguira una funcion con ese nombre*/
-int ShowPrincipalMenu();
-/*añadir 2 funciones int para FormaDeSeleccionDePersonajes y ResumenDeSeleccion, para realizar el otro menu//
-recordar hacer una funcion aleatrorio entera que sera llamada en FormaDeSeleccionDePersonajes*/
-void SelectLanguage();// español opcion 1, ingles opcion 2//
+char ShowPrincipalMenu();
 void Principaloop();
 void MenuJump();
-void ConfigurarPartida();
 void IniciarCuentaRegresiva();
-
+/*añadir 2 funciones int para SeleccionDePersonaje y recordar hacer una funcion aleatrorio entera  para el dado*/
+void SelectLanguage();// español opcion 1, ingles opcion 2//
 /* VARIABLES GLOBALES*/
 int Lenguaje=0; /* 0 es español y 1 ingles*/
 bool JuegoEncendido =true;//por ahora solo la que conrtola el apagado del juego//
 
 // Estructuras Globales//
-//<<<<<grupos de cartas >>//
+//<<<<<grupos de cartas  hechos por PAola>>//
+
+
+//arreglos Globables//
+
+
+
+
 
 
 /*INT MAIN EN DONDE LLAMO SOLO A DOS FUNCIONES */
 int main()
-{	SelectLanguage();
+{
+	SelectLanguage();
 	Principaloop();
 	return 0;
 }
 /*===================================================================================
 =====================================================================================
 ======================FUNCIONES====================================================*/
+
+
+
+
+
 void MenuJump()
 {
 	printf("\n>>>>>>>>>>>>>>>>>>>>O<<<<<<<<<<<<<<<<<<<<\n");
 	printf("=========================================\n");
 	printf("\n");
 	printf("=========================================\n");
+	printf("\n>>>>>>>>>>>>>>>>>>>>O<<<<<<<<<<<<<<<<<<<<\n");
 }
 /* aca se elije el idioma del juego*/
 void SelectLanguage()
@@ -73,114 +84,57 @@ void SelectLanguage()
 	}
 	MenuJump();
 }
+//funcion encargada del menu principal//
+char ShowPrincipalMenu()
+{
+	char SeleccionUsuario;
+	printf ("\n ====Ecos de Traicion y Horror en C===\n\n \nPOR FAVOR SELECCIONE UNA OPCION\n");
+	printf ("\n 1-- Ver lista de personajes \n \n 2-- Formar Equipos \n");
+	printf ("\n 3-- Ejecutar Batalla \n \n 4-- Mostar Resultados\n");
+	printf ("\n 5-- SALIR DEL JUEGO!\n \n SU SELECCION   ");
+	scanf(" %c", &SeleccionUsuario);
+	MenuJump();
+	return SeleccionUsuario;
+}
 /* es el bucle principal donde se inicia el juego*/
 void Principaloop()
 {
-    int OpcionDeInicio;
+    char OpcionDeInicio;
 
     while (JuegoEncendido == true)
     {
         OpcionDeInicio = ShowPrincipalMenu();
-
         switch (OpcionDeInicio) 
         {
-            case 1:
-                ConfigurarPartida();
-                break;
-            case 2:
-                printf("\n ***==informacion y reglas== del juego***\n");
-                break;
-            case 3:
-                printf("\n**** Ver lista de personajes****\n");
-                break;
-            case 4:
+            case '1':
+            	printf("\n  CATALOGO DE PERSONAJES CON LORE \n");
+            	// supongo que aca hay que llamar a la estructura de prsonajes //
+            break;
+            
+            case '2':
+                printf("\n CREACION DE EQUIPOS\n");
+                // aca mostrar y hacer el ciuclo de seleccion de los personajes y al final cartas de ambiente 
+            break;
+                
+            case '3':
+                printf("\nINICIAR ENFRENTAMIENTO\n");
+            break;
+                
+            case '4':
+                printf("\nREGISTRO  DE  VENCEDORES  EN  IRONHEVEN\n");
+            break;
+                
+            case '5':
                 printf("\n*** =SALIENDO DEL JUEGO GRACIAS POR JUGAR! ***\n");
                 JuegoEncendido = false;
-                break;
+            break;
+                
             default:
                 printf("\n==Opcion no valida! Intente de nuevo Por favor===\n");
-                break;
-        }
-    }
-    MenuJump();
+            break;
+            
+        }	MenuJump();
+    }	
+    
 }
-//funcion encargada del menu principal//
-int ShowPrincipalMenu()
-{
-	int SeleccionUsuario;
-	printf ("\n ====Ecos de Traicion y Horror en C====\n");
-	printf ("\nPOR FAVOR SELECCIONE UNA OPCION\n");
-	printf ("\n 1-- JUGAR\n");
-	printf ("\n 2-- INFORMACION DEL JUEGO\n");
-	printf ("\n 3-- VER LISTA DE PERSONAJES\n");
-	printf ("\n 4-- SALIR DEL JUEGO\n");
-	printf ("\n SU SELECCION:     ");
-	scanf("%d", &SeleccionUsuario);
-	MenuJump();
-	return SeleccionUsuario;
 
-}
-//en esta funcion pedimos el modo de juego//
-void ConfigurarPartida()
-{
-	//variables locales de la funcion//
-	bool MenuDeModos=true;
-	int SeleccionModoJuego;
-	do
-	{
-		printf ("\n ======  MODO    de    JUEGO========== \n");
-		printf ("\n");
-		printf ("\n Seleccione el MODO de JUEGO \n");
-		printf ("\n1--P vs P (Persona versus Persona)  \n");
-		printf ("\n2--P vs M (Persona versus Maquina)  \n");
-		printf ("\n3--M vs M **SOLO ESPECTADOR** (Maquina versus Maquina)  \n");
-		printf ("\n4--Para ir al MENU anterior  \n");
-		printf ("\n5--Para salir del juego \n");
-		printf ("\n**SU SELECCION: ");
-		scanf ("%d", &SeleccionModoJuego);
-		if (SeleccionModoJuego==1)
-		{
-			//en esta seleccion va a ir la funcion de forma de eleccion de personajes//
-			printf ("\n===========================================================================================\n");
-			printf(">>>>Ha seleccionado el modo -P vs P-");
-			printf ("\n===========================================================================================\n");
-		}
-		else if (SeleccionModoJuego==2)
-		{
-			//en esta seleccion va a ir la funcion de forma de eleccion de personajes//
-			printf ("\n===========================================================================================\n");
-			printf(">>>>Ha seleccionado el modo -P vs M-");
-			printf ("\n===========================================================================================\n");
-		}
-		else if (SeleccionModoJuego==3)
-		{
-			//al seleccionar esto ira al resumen de eleccion de personajes//
-			printf ("\n===========================================================================================\n");
-			printf (">>>>Ha seleccionado el modo ESPECTADOR -M vs M-");
-			printf ("\n===========================================================================================\n");
-		}
-		else if (SeleccionModoJuego==4)
-		{
-			//ir al menu anterior//
-			printf ("\n===========================================================================================\n");
-			printf (">>>Regresando al MENU anterior ");
-			printf ("\n===========================================================================================\n");
-			MenuDeModos=false;
-		}
-		else if (SeleccionModoJuego==5)
-		{
-			//condicion de salidadel while del int main//
-			printf("\n                   ***=SALIENDO DEL JUEGO GRACIAS POR JUGAR!**");
-			//menudemodos=false, ahi le digo que al seleccionar 5 sale de ese ciclo y la ora condicion me cierra el ciclo while principal//
-			MenuDeModos=false;
-			JuegoEncendido =false;
-			
-		}
-		else //en caso que ninguna se cumpla se muetra el mensaje de error//
-		{
-			printf ("\n====>>>>>>>>>>>>>>>>>=============================================\n");
-			printf ("\n==Opcion no valida! Intente de nuevo Por favor===\n ");
-			printf ("\n=================================================<<<<<<<<<<<<<<<<<<\n");
-		}
-	} while(MenuDeModos==true);
-}
