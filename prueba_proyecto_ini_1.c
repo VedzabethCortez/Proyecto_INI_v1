@@ -8,49 +8,61 @@ IDEA: Juego con 12 personajes y 4 grupos (3 por grupo)  5 VS5 .
 4. Indentación: Respetar el sangrado reglamentario para mantener el orden.
 5. Idioma: El profesor mencionó que la creación de variables debía ser en inglés... aunque mas adelante las traducire*/
 /* Librerias usadas*/
-#include <stdio.h>   /* necesaria para imprimir y obtener datos del usuario*/
-#include <stdbool.h> /* para poder usar valores verdaderos o falsos*/
-#include <stdlib.h>  /* funciones como rand y srand para numeros "aleatorios"*/
-#include <time.h>    /* necesaria para que la funcion srand tome el reloj interno del computador como "semilla"*/
-#include <math.h> /* Necesaria para operaciones matematicas un poco mas avanzadas */
-/* INDICE DE PROTOTIPOS(FUNCIONES) se iran mencionando aca para que el programa sepa que en
+#include <stdio.h>   // necesaria para imprimir y obtener datos del usuario
+#include <stdbool.h> // para poder usar valores verdaderos o falsos
+#include <stdlib.h>  // funciones como rand y srand para numeros "aleatorios"
+#include <time.h>    // necesaria para que la funcion srand tome el reloj interno del computador como "semilla"
+#include <math.h> // Necesaria para operaciones matematicas un poco mas avanzadas
+
+
+// ===================ESTRUCTURAS GLOBLALES=============
+//<<<<<grupos de cartas  hechos por PAola>>
+typedef struct 
+{
+	int CharacterID;// Identificacion del personaje
+    char Group[30];// Grupo al que pertenece el Personaje
+    char Type[30]; // Tipo de personaje (Guerrero, Distancia, Tanque)
+    char Name[30]; // Nombre del Personaje
+    float Hp; // Vida Máxima del Personaje
+    float Def; // Defensa del Personaje
+    float Atk; // Ataque del Personaje
+    int Energy; // Energía del Personaje 
+} Character;
+// ==================VARIABLES GLOBALEs====================
+
+Character Roster[12]; // Todos los Personajes que son parte del Juego.
+int Lenguaje=0; // 0 es español y 1 ingles
+bool JuegoEncendido =true;//por ahora solo la que conrtola el apagado del juego
+
+
+
+//===============ARREGLOS GLOBALES===============
+
+
+
+/* ==============INDICE DE PROTOTIPOS(FUNCIONES) ===========
+se iran mencionando aca para que el programa sepa que en
 algun momento conseguira una funcion con ese nombre*/
 char ShowPrincipalMenu();
 void Principaloop();
 void MenuJump();
-void IniciarCuentaRegresiva();
-/*añadir 2 funciones int para SeleccionDePersonaje y recordar hacer una funcion aleatrorio entera  para el dado*/
-void SelectLanguage();// español opcion 1, ingles opcion 2//
-/* VARIABLES GLOBALES*/
-int Lenguaje=0; /* 0 es español y 1 ingles*/
-bool JuegoEncendido =true;//por ahora solo la que conrtola el apagado del juego//
+void CreateRoster();//crea a los personajes (Paola)
+void ShowRoster();//muestra a los personajes en catalogo
+/*añadir 2 funciones int para SeleccionDePersonaje
+ y recordar hacer una funcion aleatrorio entera  para el dado*/
+void SelectLanguage();// español opcion 1, ingles opcion 2
 
-// Estructuras Globales//
-//<<<<<grupos de cartas  hechos por PAola>>//
-
-
-//arreglos Globables//
-
-
-
-
-
-
-/*INT MAIN EN DONDE LLAMO SOLO A DOS FUNCIONES */
+//===========INT MAIN donde inicializamos algunas funciones ========
 int main()
-{
+{   
+	CreateRoster();
 	SelectLanguage();
 	Principaloop();
 	return 0;
 }
 /*===================================================================================
-=====================================================================================
-======================FUNCIONES====================================================*/
-
-
-
-
-
+==============================================By: Paola&Jimmelis================
+======================FUNCIONES MENU================================================*/
 void MenuJump()
 {
 	printf("\n>>>>>>>>>>>>>>>>>>>>O<<<<<<<<<<<<<<<<<<<<\n");
@@ -107,8 +119,9 @@ void Principaloop()
         switch (OpcionDeInicio) 
         {
             case '1':
-            	printf("\n  CATALOGO DE PERSONAJES CON LORE \n");
-            	// supongo que aca hay que llamar a la estructura de prsonajes //
+            	printf("\n   LISTA DE PERSONAJES\n");
+            	ShowRoster();
+            	// llamamos al catalogo
             break;
             
             case '2':
@@ -137,4 +150,47 @@ void Principaloop()
     }	
     
 }
+/*===================================================================================
+=====================================================================================
+======================SECCION DE PERSONAJES y  CAALOGO===============================*/
+void CreateRoster()
+ {
+    /* Aquí se crean los Personajes junto a sus estadísticas; aquí puedes editar tanto sus 
+    Estadísticas cómo su nombre, y cualquier otro Valor único de cada personaje. */
+    
+    // { ID,"Grupo","Tipo","Nombre", Vida, Defensa, Ataque, Energía}
+    Character creating[12] = 
+	{
+        // Nobles de Ironhaven
+        { 1,"Nobles de Ironheven","Guerrero","Alaric", 150, 150, 150, 150}, 
+        { 2,"Nobles de Ironheven","Distancia","Elara", 100, 50, 200, 250}, 
+        { 3,"Nobles de Ironheven","Tanque","Gareth, el Leal", 250, 200, 100, 50}, 
+        // Los Cristalizados
+        {4,"Los Cristalizados","Tanque","Espectro de Obsidiana", 250, 200, 100, 50}, 
+        {5,"Los Cristalizados","Guerrero" ,"Jaspe, el Baron Rojo", 150, 150, 150, 150}, 
+        {6,"Los Cristalizados","Distancia","Selene, Demonio de Plata", 100, 50, 200, 250}, 
+        // Cazadores Hostiles
+        {7,"Cazadores Hostiles","Tanque","Gehrman, el Verdugo", 250, 200, 100, 50}, 
+        {8,"Cazadores Hostiles","Distancia" ,"Kira, Asesino de Monstruos", 100, 50, 200, 250}, 
+        {9,"Cazadores Hostiles","Guerrero","Orion, Cazador Celestial", 150, 150, 150, 150}, 
+        // La Bruma Escarlata
+        {10,"La Bruma Escarlata","Guerrero","El Arcano", 300, 50, 0, 250}, 
+        {11,"La Bruma Escarlata","Tanque","Rey Cedric", 250, 200, 100, 50}, 
+        {12,"La Bruma Escarlata","Distancia","Principe Arthur", 150, 150, 150, 150}
+    };
+    for (int i = 0; i < 12; i++) 
+        Roster[i] = creating[i];
+}
 
+void ShowRoster() 
+{
+    printf("****       CATALOGO DE PERSONAJES DE IRONHAVEN        ****\n");
+    for (int i = 0; i < 12; i++) 
+    {
+	printf("\n ====================================================================");
+        printf("\nID:    %d   |Grupo: %s\n", Roster[i].CharacterID,Roster[i].Group );
+        printf(" Nombre: %s   |Tipo: %s\n",Roster[i].Name , Roster[i].Type);
+        printf("       ESTADISTICAS\n HP: %.2f  |DEF: %.2f \n ATK: %.2f | PODER: %d\n",Roster[i].Hp, Roster[i].Def, Roster[i].Atk, Roster[i].Energy);       
+    }
+
+}
